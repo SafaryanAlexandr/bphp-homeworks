@@ -6,27 +6,42 @@ $email = $_POST["email"];
 $name = $_POST["firstName"];
 $lastName = $_POST["lastName"];
 $middleName = $_POST["middleName"];
-$code = $_POST["code"];
+$codeTest = $_POST["code"];
+$code = "nd82jaake";
+$reply;
+$number = 0;
 
-if(!preg_match("/\w/",$login)) {
-    echo "Логин $login содержит недопустимый символ!<br>";
+if(!preg_match("/\w+/",$login)) {
+    $reply = "Логин $login содержит недопустимый символ!<br>";
+    $number++;
 }
 if(!preg_match("/\d{8,15}/",$password)) {
-    echo "Пароль должен быть от 8 до 15 символов!<br>";
+    $reply = $reply . "Пароль должен содержать только цифры от 8 до 15 символов.<br>";
+    $number++;
 }
-if(!preg_match("/\w{1}@\w.\w/",$email)) {
-    echo"Почта должна быть формата почта@домен.доменнаязона.<br>";
+if(!preg_match("/\w+@\w+.\w+/",$email)) {
+    $reply = $reply . "Почта должна быть формата почта@домен.доменнаязона.<br>";
+    $number++;
+
 }
 if(!preg_match("/\w+/",$name)) {
-    echo "Введите ИМЯ <br>";
+    $reply = $reply . "Введите ИМЯ <br>";
+    $number++;
 }
 if(!preg_match("/\w+/",$lastName)) {
-    echo "Введите ФАМИЛИЮ <br>";
+    $reply = $reply . "Введите ФАМИЛИЮ <br>";
+    $number++;
 }
 if(!preg_match("/\w+/",$middleName)) {
-    echo "Введите ОТЧЕСТВО <br>";
+    $reply = $reply . "Введите ОТЧЕСТВО <br>";
+    $number++;
 }
 
-if (!$code === "nd82jaake") {
-  echo "Кодовое слово не верное!!! <br>";
+if ($code !== $codeTest) {
+  $reply = $reply . "Кодовое слово не верное!!! <br>";
+  $number++;
 }
+if ($number === 0) {
+  $reply = "Форма отправлена";
+}
+echo $reply;
